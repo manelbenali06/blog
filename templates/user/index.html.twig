@@ -1,0 +1,81 @@
+{% extends 'layout.html.twig' %}
+
+{% block final_stylesheets %}
+		<!-- DATA TABLE CSS -->
+		<link href="{{ asset('spruha/assets/plugins/datatable/css/dataTables.bootstrap5.css') }}" rel="stylesheet" />
+		<link href="{{ asset('spruha/assets/plugins/datatable/css/buttons.bootstrap5.min.css') }}"  rel="stylesheet">
+		<link href="{{ asset('spruha/assets/plugins/datatable/css/responsive.bootstrap5.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+{% block module %}Utilisateurs{% endblock %}
+{% block action %}Liste{% endblock %}
+
+{% block content %}
+
+		<!-- Row -->
+		<div class="row row-sm">
+			<div class="col-lg-12">
+				<div class="card custom-card">
+					<div class="card-body">
+						<!--
+						<div>
+							<h6 class="main-content-label mb-1">Responsive DataTable</h6>
+							<p class="text-muted card-sub-title">Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.</p>
+						</div>
+						-->
+						<div class="table-responsive">
+							<table class="table table-bordered" id="example2">
+								<thead>
+									<tr>
+										<th class="wd-20p">Id</th>
+										<th class="wd-25p">Nom</th>
+										<th class="wd-15p">Mail</th>
+										<th class="wd-15p">Vérifié ?</th>
+										<th class="wd-20p">Articles</th>
+										<th class="wd-20p">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									{% for user in users %}
+										<tr>
+											<td>{{ user.id }}</td>
+											<td>{{ user.displayName }}</td>
+											<td>{{ user.email }}</td>
+											<td>{{ user.isVerified == false ? 'Non vérifiée' : 'Vérifiée' }}</td>
+											<td>{{ user.posts | length }}</td>
+											<td>
+												<a href="{{ path('admin_user_delete', {id: user.id}) }}" class="btn btn-primary btn-sm" onclick="return confirm('Etes-vous certain ?')">Supprimer</a>
+											</td>
+										</tr>
+									{% endfor %}
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+
+{% endblock %}
+
+{% block final_javascripts %}
+<!-- Internal Data Table js -->
+		<script src="{{ asset('spruha/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+		<script src="{{ asset('spruha/assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
+		<script src="{{ asset('spruha/assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+		<script src="{{ asset('spruha/assets/plugins/datatable/js/buttons.bootstrap5.min.js') }}"></script>
+		<script src="{{ asset('spruha/assets/plugins/datatable/js/jszip.min.js') }}"></script>
+		<script src="{{ asset('spruha/assets/plugins/datatable/pdfmake/pdfmake.min.js') }}"></script>
+		<script src="{{ asset('spruha/assets/plugins/datatable/pdfmake/vfs_fonts.js') }}"></script>
+		<script src="{{ asset('spruha/assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+		<script src="{{ asset('spruha/assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+		<script src="{{ asset('spruha/assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+		<script src="{{ asset('spruha/assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
+		<script src="{{ asset('spruha/assets/plugins/datatable/responsive.bootstrap5.min.js') }}"></script>
+		<script src="{{ asset('spruha/assets/js/table-data.js') }}"></script>
+		<script src="{{ asset('spruha/assets/js/select2.js') }}"></script>
+{% endblock %}

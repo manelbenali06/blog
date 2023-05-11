@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+{% block module %}User{% endblock %}
+{% block action %}Me{% endblock %}
+
+{% block content %}
+
+    <h2>Mes informations</h2>
+    <div>Email : {{ user.email }}</div>
+    <div>Vérifiée : {{ user.isVerified }}</div>
+    <div>Display name : {{ user.displayName }}</div>
+    <div>Role : 
+        {% for role in user.roles %}
+            {{ role }} - 
+        {% endfor %}
+    </div>
+
+    <h2>Mes articles</h2>
+    <ul>
+        {% for post in user.posts %}
+            <li>{{ post.title }}</li> 
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
